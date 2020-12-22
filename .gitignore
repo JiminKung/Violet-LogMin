@@ -2,3 +2,4 @@
 LogMin.yaml
 /.idea
 /__pycache__
+/utils/__pycache__
