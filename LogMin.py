@@ -3,7 +3,7 @@ import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 
-from generate_email_content import joint_email_content
+from utils.generate_email_content import joint_email_content
 
 with open("LogMin.yaml", mode='r', encoding="utf-8") as f:
     CONFIG = yaml.load(f, Loader=yaml.FullLoader)
@@ -28,12 +28,12 @@ def send_email(logs):
 if __name__ == "__main__":
     logs = [
         {
-            "member": "Zhang San",
-            "events": ["Coding", "Reading paper Comprehensive Privacy Analysis of Deep Learning"]
+            "member": "张三",
+            "events": ["Coding", "Reading paper"]
         },
         {
-            "member": "Wang Er",
-            "events": ["上课", "阅读论文 联合学习中的概念和应用"]
+            "member": "王二",
+            "events": ["上课", "阅读论文"]
         }
     ]
     send_email(logs)
