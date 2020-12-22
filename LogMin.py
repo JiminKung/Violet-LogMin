@@ -4,7 +4,6 @@ from email.header import Header
 from email.mime.text import MIMEText
 
 from utils.generate_email_content import joint_email_content
-from utils.register_logs import adjust_logs
 
 with open("LogMin.yaml", mode='r', encoding="utf-8") as f:
     CONFIG = yaml.load(f, Loader=yaml.FullLoader)
@@ -17,6 +16,18 @@ def organize_html_email(logs, receiver):
     email["To"] = receiver["address"]
     email["Subject"] = Header(email_header, "utf-8").encode()
     return email
+
+def adjust_logs(logs, receiver):
+    """Put the receiver at the head of log list."""
+    current_full_name = receiver["sur_name"] + receiver["given_name"]
+    current_log = None
+    for i, log in enumerate(logs):
+        if log["member"] == current_full_name:
+            current_log = logs.pop(i)
+            break
+    if current_log is None:
+        return
+    logs.insert(0, current_log)
 
 
 def send_email(logs):

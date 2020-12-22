@@ -6,6 +6,7 @@ with open("LogMin.yaml", mode='r', encoding="utf-8") as f:
 
 
 def adjust_logs(logs, receiver):
+    """Put the receiver at the head of log list."""
     current_full_name = receiver["sur_name"] + receiver["given_name"]
     current_log = None
     for i, log in enumerate(logs):
