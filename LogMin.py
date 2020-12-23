@@ -17,6 +17,7 @@ def organize_html_email(logs, receiver):
     email["Subject"] = Header(email_header, "utf-8").encode()
     return email
 
+
 def adjust_logs(logs, receiver):
     """Put the receiver at the head of log list."""
     current_full_name = receiver["sur_name"] + receiver["given_name"]
