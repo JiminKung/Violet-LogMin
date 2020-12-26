@@ -1,2 +1,2 @@
-# LogMin
-A auto-log robot.
+# Violet-LogMin
+A auto-log system.
