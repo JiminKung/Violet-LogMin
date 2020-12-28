@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 
 from utils.generate_email_content import joint_email_content
 
-with open("LogMin.yaml", mode='r', encoding="utf-8") as f:
+with open("Violet-LogMin.yaml", mode='r', encoding="utf-8") as f:
     CONFIG = yaml.load(f, Loader=yaml.FullLoader)
 
 

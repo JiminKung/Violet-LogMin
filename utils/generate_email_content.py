@@ -3,7 +3,7 @@ import requests
 import datetime
 import random
 
-with open("LogMin.yaml", mode='r', encoding="utf-8") as f:
+with open("Violet-LogMin.yaml", mode='r', encoding="utf-8") as f:
     CONFIG = yaml.load(f, Loader=yaml.FullLoader)
 
 RESULT = requests.get(CONFIG["shanbay"]["url"]).json()
