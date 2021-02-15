@@ -3,15 +3,15 @@ import requests
 import datetime
 import random
 
-with open("Violet-LogMin.yaml", mode='r', encoding="utf-8") as f:
+with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:
     CONFIG = yaml.load(f, Loader=yaml.FullLoader)
 
-RESULT = requests.get(CONFIG["shanbay"]["url"]).json()
+DAILY_QUOTE = requests.get(CONFIG["shanbay"]["url"]).json()
 
 
 def generate_email_header():
     today = datetime.date.today()
-    return "Log of {} {}".format(CONFIG["group"]["name"], today)
+    return "Logs of {} {}".format(CONFIG["group"]["name"], today)
 
 
 def generate_email_salutation(degree, sur_name):
@@ -21,18 +21,19 @@ def generate_email_salutation(degree, sur_name):
 def generate_email_opener():
     url = CONFIG["project"]["github"]
     opener = random.choice(CONFIG["email"]["opener"])
-    return "<p>&ensp;&ensp;This is <a href='{}'>LogMin</a>, an auto-log robot. {}</p>".format(url, opener)
+    return "<p>&ensp;&ensp;This is <a href='{}'>LogMin</a>, an auto log robot. {}</p>".format(url, opener)
 
 
 def generate_log_table(logs):
-    table_header = "<tr><th>{}</th><th>{}</th></tr>".format("Member", "Events")
+    table_header = "<tr><th>{}</th><th>{}</th></tr>".format("Name", "Events")
     member_events = ""
     for log in logs:
-        events = ""
-        for event in log["events"]:
-            events += (event + "<br>")
-        events = events[:-4]
-        member_events += "<tr><td>{}</td><td>{}</td></tr>".format(log["member"], events)
+        # events = ""
+        # for event in log["events"]:
+        #     events += (event + "<br>")
+        # events = events[:-4]
+        events = log["events"][:-1] + "<br>"
+        member_events += "<tr><td>{}</td><td>{}</td></tr>".format(log["name"], events)
     log_table = "<table border='1' style='border-collapse: collapse; " \
                 "margin-left: 2em'>{}{}</table>".format(table_header, member_events)
     return log_table
@@ -40,7 +41,7 @@ def generate_log_table(logs):
 
 def generate_daily_quote():
     return "<p>&ensp;&ensp;Daily quote:<br>&ensp;&ensp;" \
-           "{}<br>&ensp;&ensp;{}</p>".format(RESULT["content"], RESULT["translation"])
+           "{}<br>&ensp;&ensp;{}</p>".format(DAILY_QUOTE["content"], DAILY_QUOTE["translation"])
 
 
 def generate_email_regards():
@@ -50,7 +51,7 @@ def generate_email_regards():
 
 def generate_email_inscriber():
     inscriber = random.choice(CONFIG["email"]["inscriber"])
-    return "<p>&ensp;&ensp;{},<br>&ensp;&ensp;{}</p>".format(inscriber, CONFIG["project"]["name"])
+    return "<p>&ensp;&ensp;{},<br>&ensp;&ensp;{}</p>".format(inscriber, CONFIG["email"]["sender_name"])
 
 
 def joint_email_content(logs, receiver):
