@@ -21,21 +21,21 @@ def generate_email_salutation(degree, sur_name):
 def generate_email_opener():
     url = CONFIG["project"]["github"]
     opener = random.choice(CONFIG["email"]["opener"])
-    return "<p>&ensp;&ensp;This is <a href='{}'>LogMin</a>, an auto log robot. {}</p>".format(url, opener)
+    return "<p>&ensp;&ensp;This is <a href='{}'>LogMin</a>, an auto-mail log robot. {}</p>".format(url, opener)
 
 
-def generate_log_table(logs):
-    table_header = "<tr><th>{}</th><th>{}</th></tr>".format("Name", "Events")
-    member_events = ""
-    for log in logs:
+def generate_log_table(members):
+    table_header = "<tr><th>{}</th><th>{}</th></tr>".format("Name", "Log")
+    member_log = ""
+    for member in members:
         # events = ""
         # for event in log["events"]:
         #     events += (event + "<br>")
         # events = events[:-4]
-        events = log["events"][:-1] + "<br>"
-        member_events += "<tr><td>{}</td><td>{}</td></tr>".format(log["name"], events)
+        log = member["log"] + "<br>"
+        member_log += "<tr><td>{}</td><td>{}</td></tr>".format(member["name"], log)
     log_table = "<table border='1' style='border-collapse: collapse; " \
-                "margin-left: 2em'>{}{}</table>".format(table_header, member_events)
+                "margin-left: 2em'>{}{}</table>".format(table_header, member_log)
     return log_table
 
 

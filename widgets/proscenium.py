@@ -50,6 +50,69 @@ class ProsceniumFrame(tk.LabelFrame):
                                   pady=PROSCENIUM_TEXT_CONFIG["pady"],
                                   fill=PROSCENIUM_TEXT_CONFIG["fill"])
 
-        for _ in range(1):
-            self.proscenium_text.insert("insert", VIOLET_LOGMIN_DIALOGUE_CONFIG[self.language]["welcome"] + "\n")
-        self.proscenium_text.config(state=tk.DISABLED)
+        self.proscenium_text.see("end")
+        self.perform_opening_act()
+        self.list_cast()
+
+    def perform_opening_act(self):
+        welcome_lines = VIOLET_LOGMIN_DIALOGUE_CONFIG["role"] + \
+                        VIOLET_LOGMIN_DIALOGUE_CONFIG[self.language]["welcome"] + "\n\n"
+        introduction_lines = VIOLET_LOGMIN_DIALOGUE_CONFIG["role"] + \
+                             VIOLET_LOGMIN_DIALOGUE_CONFIG[self.language]["introduction"] + "\n\n"
+        website_lines = VIOLET_LOGMIN_DIALOGUE_CONFIG["role"] + \
+                        VIOLET_LOGMIN_DIALOGUE_CONFIG[self.language]["website"] + "\n\n"
+        self.proscenium_text.insert("end", welcome_lines)
+        self.proscenium_text.insert("end", introduction_lines)
+        self.proscenium_text.insert("end", website_lines)
+        self.proscenium_text.config(state="disabled")
+
+    def list_cast(self):
+        self.proscenium_text.config(state="normal")
+        violet_introduction_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
+                                    VIOLET_DIALOGUE_CONFIG[self.language]["introduction"] + "\n\n"
+        logmin_introduction_lines = LOGMIN_DIALOGUE_CONFIG["role"] + \
+                                    LOGMIN_DIALOGUE_CONFIG[self.language]["introduction"] + "\n\n"
+        tutorial_lines = VIOLET_LOGMIN_DIALOGUE_CONFIG["role"] + \
+                         VIOLET_LOGMIN_DIALOGUE_CONFIG[self.language]["tutorial"] + "\n\n"
+        self.proscenium_text.insert("end", violet_introduction_lines)
+        self.proscenium_text.insert("end", logmin_introduction_lines)
+        self.proscenium_text.insert("end", tutorial_lines)
+        self.proscenium_text.config(state="disabled")
+        # self.proscenium_text.see("end")
+
+    def throw_miss_selecting_exception(self):
+        self.proscenium_text.config(state="normal")
+        violet_miss_selecting_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
+                                      VIOLET_DIALOGUE_CONFIG[self.language]["miss_selecting"] + "\n\n"
+        self.proscenium_text.insert("end", violet_miss_selecting_lines)
+        self.proscenium_text.config(state="disabled")
+        self.proscenium_text.see("end")
+
+    def throw_empty_input_exception(self):
+        self.proscenium_text.config(state="normal")
+        violet_empty_input_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
+                                      VIOLET_DIALOGUE_CONFIG[self.language]["empty_input"] + "\n\n"
+        self.proscenium_text.insert("end", violet_empty_input_lines)
+        self.proscenium_text.config(state="disabled")
+        self.proscenium_text.see("end")
+
+    def throw_log_unchange_exception(self):
+        pass
+
+    def display_selected_member(self, member):
+        pass
+
+    def display_send_permission(self, send_permission):
+        pass
+
+    def display_submitted_log(self, log):
+        pass
+
+    def display_sent_logs(self, logs):
+        pass
+
+    def display_send_instruction(self):
+        pass
+
+    def display_send_state(self):
+        pass

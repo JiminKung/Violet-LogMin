@@ -8,12 +8,12 @@ with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:
 
 WIDGET_CONFIG = CONFIG["widget"]
 LOG_FRAME_CONFIG = WIDGET_CONFIG["log_frame"]
-EVENT_TEXT_CONFIG = WIDGET_CONFIG["event_text"]
-EVENT_BUTTON_FRAME_CONFIG = WIDGET_CONFIG["event_button_frame"]
-EVENT_SUBMIT_BUTTON_CONFIG = WIDGET_CONFIG["event_submit_button"]
-EVENT_CLEAR_BUTTON_CONFIG = WIDGET_CONFIG["event_clear_button"]
-EVENT_VERTICAL_SCROLLBAR_CONFIG = WIDGET_CONFIG["event_vertical_scrollbar"]
-EVENT_HORIZONTAL_SCROLLBAR_CONFIG = WIDGET_CONFIG["event_horizontal_scrollbar"]
+LOG_TEXT_CONFIG = WIDGET_CONFIG["log_text"]
+LOG_BUTTON_FRAME_CONFIG = WIDGET_CONFIG["log_button_frame"]
+LOG_SUBMIT_BUTTON_CONFIG = WIDGET_CONFIG["log_submit_button"]
+LOG_CLEAR_BUTTON_CONFIG = WIDGET_CONFIG["log_clear_button"]
+LOG_VERTICAL_SCROLLBAR_CONFIG = WIDGET_CONFIG["log_vertical_scrollbar"]
+LOG_HORIZONTAL_SCROLLBAR_CONFIG = WIDGET_CONFIG["log_horizontal_scrollbar"]
 MEMBER_LIST_TREEVIEW_CONFIG = WIDGET_CONFIG["member_list_treeview"]
 
 
@@ -33,90 +33,95 @@ class LogFrame(tk.LabelFrame):
                   column=LOG_FRAME_CONFIG["column"],
                   sticky=LOG_FRAME_CONFIG["sticky"])
 
-        self.event_text = None
-        self.event_vertical_scrollbar = None
-        self.event_horizontal_scrollbar = None
-        self.event_button_frame = None
-        self.event_submit_button = None
-        self.event_clear_button = None
+        self.log_text = None
+        self.log_vertical_scrollbar = None
+        self.log_horizontal_scrollbar = None
+        self.log_button_frame = None
+        self.log_submit_button = None
+        self.log_clear_button = None
 
         self.setup()
 
     def setup(self):
 
-        self.event_text = tk.Text(self, wrap=EVENT_TEXT_CONFIG["wrap"],
-                                  width=EVENT_TEXT_CONFIG["width"],
-                                  height=EVENT_TEXT_CONFIG["height"],
-                                  font=(EVENT_TEXT_CONFIG["font_family"],
-                                        EVENT_TEXT_CONFIG["font_size"],
-                                        EVENT_TEXT_CONFIG["font_weight"]))
+        self.log_text = tk.Text(self, wrap=LOG_TEXT_CONFIG["wrap"],
+                                width=LOG_TEXT_CONFIG["width"],
+                                height=LOG_TEXT_CONFIG["height"],
+                                font=(LOG_TEXT_CONFIG["font_family"],
+                                      LOG_TEXT_CONFIG["font_size"],
+                                      LOG_TEXT_CONFIG["font_weight"]))
 
-        self.event_vertical_scrollbar = tk.Scrollbar(self,
-                                                     orient=EVENT_VERTICAL_SCROLLBAR_CONFIG["orient"],
-                                                     command=self.event_text.yview)
-        self.event_vertical_scrollbar.pack(side=EVENT_VERTICAL_SCROLLBAR_CONFIG["side"],
-                                           fill=EVENT_VERTICAL_SCROLLBAR_CONFIG["fill"])
+        self.log_vertical_scrollbar = tk.Scrollbar(self,
+                                                   orient=LOG_VERTICAL_SCROLLBAR_CONFIG["orient"],
+                                                   command=self.log_text.yview)
+        self.log_vertical_scrollbar.pack(side=LOG_VERTICAL_SCROLLBAR_CONFIG["side"],
+                                         fill=LOG_VERTICAL_SCROLLBAR_CONFIG["fill"])
 
-        self.event_horizontal_scrollbar = tk.Scrollbar(self,
-                                                       orient=EVENT_HORIZONTAL_SCROLLBAR_CONFIG["orient"],
-                                                       command=self.event_text.xview)
-        self.event_horizontal_scrollbar.pack(side=EVENT_HORIZONTAL_SCROLLBAR_CONFIG["side"],
-                                             fill=EVENT_HORIZONTAL_SCROLLBAR_CONFIG["fill"])
+        self.log_horizontal_scrollbar = tk.Scrollbar(self,
+                                                     orient=LOG_HORIZONTAL_SCROLLBAR_CONFIG["orient"],
+                                                     command=self.log_text.xview)
+        self.log_horizontal_scrollbar.pack(side=LOG_HORIZONTAL_SCROLLBAR_CONFIG["side"],
+                                           fill=LOG_HORIZONTAL_SCROLLBAR_CONFIG["fill"])
 
-        self.event_text.config(yscrollcommand=self.event_vertical_scrollbar.set,
-                               xscrollcommand=self.event_horizontal_scrollbar.set)
+        self.log_text.config(yscrollcommand=self.log_vertical_scrollbar.set,
+                             xscrollcommand=self.log_horizontal_scrollbar.set)
 
-        # self.log_content_frame.pack(side=LOG_CONTENT_FRAME_CONFIG["side"])
-        self.event_text.pack(side=EVENT_TEXT_CONFIG["side"],
-                             padx=EVENT_TEXT_CONFIG["padx"],
-                             pady=EVENT_TEXT_CONFIG["pady"])
+        self.log_text.pack(side=LOG_TEXT_CONFIG["side"],
+                           padx=LOG_TEXT_CONFIG["padx"],
+                           pady=LOG_TEXT_CONFIG["pady"])
 
-        self.event_button_frame = tk.Frame(self)
-        self.event_button_frame.pack(side=EVENT_BUTTON_FRAME_CONFIG["side"])
+        self.log_button_frame = tk.Frame(self)
+        self.log_button_frame.pack(side=LOG_BUTTON_FRAME_CONFIG["side"])
 
-        self.event_submit_button = tk.Button(self.event_button_frame,
-                                             text=EVENT_SUBMIT_BUTTON_CONFIG[self.language]["text"],
-                                             font=(EVENT_SUBMIT_BUTTON_CONFIG["font_family"],
-                                                   EVENT_SUBMIT_BUTTON_CONFIG["font_size"],
-                                                   EVENT_SUBMIT_BUTTON_CONFIG["font_weight"]),
-                                             command=self.submit_event)
-        self.event_submit_button.pack(side=EVENT_SUBMIT_BUTTON_CONFIG["side"],
-                                      padx=EVENT_SUBMIT_BUTTON_CONFIG["padx"],
-                                      pady=EVENT_SUBMIT_BUTTON_CONFIG["pady"])
+        self.log_submit_button = tk.Button(self.log_button_frame,
+                                           text=LOG_SUBMIT_BUTTON_CONFIG[self.language]["text"],
+                                           font=(LOG_SUBMIT_BUTTON_CONFIG["font_family"],
+                                                 LOG_SUBMIT_BUTTON_CONFIG["font_size"],
+                                                 LOG_SUBMIT_BUTTON_CONFIG["font_weight"]),
+                                           command=self.submit_event)
+        self.log_submit_button.pack(side=LOG_SUBMIT_BUTTON_CONFIG["side"],
+                                    padx=LOG_SUBMIT_BUTTON_CONFIG["padx"],
+                                    pady=LOG_SUBMIT_BUTTON_CONFIG["pady"])
 
-        self.event_clear_button = tk.Button(self.event_button_frame,
-                                            text=EVENT_CLEAR_BUTTON_CONFIG[self.language]["text"],
-                                            font=(EVENT_CLEAR_BUTTON_CONFIG["font_family"],
-                                                  EVENT_CLEAR_BUTTON_CONFIG["font_size"],
-                                                  EVENT_CLEAR_BUTTON_CONFIG["font_weight"]),
-                                            command=self.clear_event_text)
-        self.event_clear_button.pack(side=EVENT_CLEAR_BUTTON_CONFIG["side"],
-                                     padx=EVENT_CLEAR_BUTTON_CONFIG["padx"],
-                                     pady=EVENT_CLEAR_BUTTON_CONFIG["pady"])
+        self.log_clear_button = tk.Button(self.log_button_frame,
+                                          text=LOG_CLEAR_BUTTON_CONFIG[self.language]["text"],
+                                          font=(LOG_CLEAR_BUTTON_CONFIG["font_family"],
+                                                LOG_CLEAR_BUTTON_CONFIG["font_size"],
+                                                LOG_CLEAR_BUTTON_CONFIG["font_weight"]),
+                                          command=self.clear_log_text)
+        self.log_clear_button.pack(side=LOG_CLEAR_BUTTON_CONFIG["side"],
+                                   padx=LOG_CLEAR_BUTTON_CONFIG["padx"],
+                                   pady=LOG_CLEAR_BUTTON_CONFIG["pady"])
 
     def submit_event(self):
-        events = self.event_text.get("0.0", "end")
-        events = events.replace("\n\n", "\n")
         member_list_treeview = self.context_box["member_list_frame"].member_list_treeview
         if len(member_list_treeview.selection()) == 0:
+            self.context_box["proscenium_frame"].throw_miss_selecting_exception()
             return
         selected_item = member_list_treeview.selection()[0]
         selected_member = member_list_treeview.item(selected_item, "values")
         selected_index = member_list_treeview.index(selected_item)
-        member_list_treeview.delete(selected_item)
+        log = self.log_text.get("0.0", "end")[:-1]
+        if log == "" or log.strip() == "":
+            self.context_box["proscenium_frame"].throw_empty_input_exception()
+            return
+        log = log.replace("\n\n", "\n")
         register_state = MEMBER_LIST_TREEVIEW_CONFIG[self.language]["register_state"][0]
-        send_state = True
+        send_permission = True
         for member in LOGMIN.members:
             if member["address"] == selected_member[3]:
+                if member["log"] == log:
+                    return
                 member["register_state"] = True
-                member["events"] = events
+                member["log"] = log
+                member_list_treeview.delete(selected_item)
                 member_list_treeview.insert("", selected_index, values=(register_state, member["name"],
                                                                         member["grade"], member["address"]))
             if not member["register_state"]:
-                send_state = False
+                send_permission = False
 
-        if send_state:
+        if send_permission:
             self.context_box["member_list_frame"].send_email_button.config(state="normal")
 
-    def clear_event_text(self):
-        self.event_text.delete("0.0", "end")
+    def clear_log_text(self):
+        self.log_text.delete("0.0", "end")

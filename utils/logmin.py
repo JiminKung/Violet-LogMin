@@ -21,19 +21,19 @@ def organize_html_email(logs, receiver):
     return email
 
 
-def adjust_logs(logs, receiver):
+def adjust_logs(members, receiver):
     """Put the receiver at the head of log list."""
-    copied_logs = copy.deepcopy(logs)
+    copied_members = copy.deepcopy(members)
     current_full_name = receiver["sur_name"] + receiver["given_name"]
-    current_log = None
-    for i, log in enumerate(copied_logs):
+    current_member = None
+    for i, log in enumerate(copied_members):
         if log["name"] == current_full_name:
-            current_log = copied_logs.pop(i)
+            current_member = copied_members.pop(i)
             break
-    if current_log is None:
+    if current_member is None:
         return
-    copied_logs.insert(0, current_log)
-    return copied_logs
+    copied_members.insert(0, current_member)
+    return copied_members
 
 def member_filter(receivers):
     members = []
@@ -47,7 +47,7 @@ def member_filter(receivers):
                   "grade": grade,
                   "address": address,
                   "register_state": False,
-                  "events": "1. ...\n2. ...\n3. ..."}
+                  "log": "1. ...\n2. ...\n3. ..."}
         members.append(member)
 
     members = sorted(members, key=lambda i: i["grade"])
@@ -58,17 +58,13 @@ def member_filter(receivers):
 class LogMin:
     def __init__(self):
         self.receivers = CONFIG["receivers"]
+        self.sender_address = SENDER_CONFIG["address"]
         self.members = member_filter(self.receivers)
         self.server = smtplib.SMTP_SSL(SENDER_CONFIG["smtp_server"], 465, timeout=3)
 
-    def send_email(self):
+    def build_mail_server(self):
         self.server.set_debuglevel(2)
         self.server.login(SENDER_CONFIG["address"], SENDER_CONFIG["authorization_code"])
-        for receiver in self.receivers:
-            adjusted_members = adjust_logs(self.members, receiver)
-            email = organize_html_email(adjusted_members, receiver)
-            self.server.sendmail(SENDER_CONFIG["address"], receiver["address"], email.as_string())
-        self.server.quit()
 
 LOGMIN = LogMin()
 

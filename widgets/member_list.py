@@ -1,8 +1,11 @@
 import yaml
 import tkinter as tk
 import tkinter.ttk as ttk
+from tkinter.messagebox import askokcancel
 
 from utils.logmin import LOGMIN
+from utils.logmin import adjust_logs
+from utils.logmin import organize_html_email
 
 with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:
     CONFIG = yaml.load(f, Loader=yaml.FullLoader)
@@ -81,25 +84,37 @@ class MemberListFrame(tk.LabelFrame):
                                        padx=MEMBER_LIST_TREEVIEW_CONFIG["padx"],
                                        pady=MEMBER_LIST_TREEVIEW_CONFIG["pady"])
 
-        self.send_email_button = tk.Button(self, state="disable",
+        self.send_email_button = tk.Button(self, state="disabled",
                                            text=SEND_EMAIL_BUTTON_CONFIG[self.language]["text"],
                                            font=(SEND_EMAIL_BUTTON_CONFIG["font_family"],
                                                  SEND_EMAIL_BUTTON_CONFIG["font_size"],
                                                  SEND_EMAIL_BUTTON_CONFIG["font_weight"]),
-                                           command=LOGMIN.send_email)
+                                           command=self.send_email)
         self.send_email_button.pack(side=SEND_EMAIL_BUTTON_CONFIG["side"],
                                     pady=SEND_EMAIL_BUTTON_CONFIG["pady"])
 
     def select_logs(self, event=None):
         if len(self.member_list_treeview.selection()) == 0:
+            self.context_box["proscenium_frame"].throw_miss_selecting_exception()
             return
         # It's set to select only one item at once.
         item = self.member_list_treeview.selection()[0]
         selected_member = self.member_list_treeview.item(item, "values")
-        events = ""
+        log = ""
         for member in LOGMIN.members:
             if member["address"] == selected_member[3]:
-                events = member["events"]
+                log = member["log"]
                 break
-        self.context_box["log_frame"].event_text.delete("0.0", "end")
-        self.context_box["log_frame"].event_text.insert("0.0", events)
+        self.context_box["log_frame"].log_text.delete("0.0", "end")
+        self.context_box["log_frame"].log_text.insert("0.0", log)
+
+    def send_email(self):
+        send_instruction = askokcancel(title=SEND_EMAIL_BUTTON_CONFIG[self.language]["message_title"],
+                                message=SEND_EMAIL_BUTTON_CONFIG[self.language]["message"])
+        if send_instruction:
+            LOGMIN.build_mail_server()
+            for receiver in LOGMIN.receivers:
+                adjusted_members = adjust_logs(LOGMIN.members, receiver)
+                email = organize_html_email(adjusted_members, receiver)
+                LOGMIN.server.sendmail(LOGMIN.sender_address, receiver["address"], email.as_string())
+            LOGMIN.server.quit()
