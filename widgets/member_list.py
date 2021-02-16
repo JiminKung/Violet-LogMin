@@ -104,17 +104,21 @@ class MemberListFrame(tk.LabelFrame):
         for member in LOGMIN.members:
             if member["address"] == selected_member[3]:
                 log = member["log"]
+                self.context_box["proscenium_frame"].display_selected_member(member)
                 break
         self.context_box["log_frame"].log_text.delete("0.0", "end")
         self.context_box["log_frame"].log_text.insert("0.0", log)
 
     def send_email(self):
         send_instruction = askokcancel(title=SEND_EMAIL_BUTTON_CONFIG[self.language]["message_title"],
-                                message=SEND_EMAIL_BUTTON_CONFIG[self.language]["message"])
+                                       message=SEND_EMAIL_BUTTON_CONFIG[self.language]["message"])
         if send_instruction:
             LOGMIN.build_mail_server()
             for receiver in LOGMIN.receivers:
                 adjusted_members = adjust_logs(LOGMIN.members, receiver)
                 email = organize_html_email(adjusted_members, receiver)
                 LOGMIN.server.sendmail(LOGMIN.sender_address, receiver["address"], email.as_string())
+                self.context_box["proscenium_frame"].display_send_finished(receiver)
             LOGMIN.server.quit()
+        else:
+            self.context_box["proscenium_frame"].display_send_cancel_instruction()

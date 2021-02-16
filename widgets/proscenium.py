@@ -91,28 +91,50 @@ class ProsceniumFrame(tk.LabelFrame):
     def throw_empty_input_exception(self):
         self.proscenium_text.config(state="normal")
         violet_empty_input_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
-                                      VIOLET_DIALOGUE_CONFIG[self.language]["empty_input"] + "\n\n"
+                                   VIOLET_DIALOGUE_CONFIG[self.language]["empty_input"] + "\n\n"
         self.proscenium_text.insert("end", violet_empty_input_lines)
         self.proscenium_text.config(state="disabled")
         self.proscenium_text.see("end")
 
     def throw_log_unchange_exception(self):
-        pass
+        self.proscenium_text.config(state="normal")
+        violet_log_unchange_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
+                                    VIOLET_DIALOGUE_CONFIG[self.language]["log_unchange"] + "\n\n"
+        self.proscenium_text.insert("end", violet_log_unchange_lines)
+        self.proscenium_text.config(state="disabled")
+        self.proscenium_text.see("end")
 
     def display_selected_member(self, member):
-        pass
+        self.proscenium_text.config(state="normal")
+        violet_select_member_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
+                                     VIOLET_DIALOGUE_CONFIG[self.language]["select_member"]\
+                                        .format(member["name"], member["address"]) + "\n\n"
+        self.proscenium_text.insert("end", violet_select_member_lines)
+        self.proscenium_text.config(state="disabled")
+        self.proscenium_text.see("end")
 
-    def display_send_permission(self, send_permission):
-        pass
+    def display_send_permission(self):
+        self.proscenium_text.config(state="normal")
+        violet_send_permission_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
+                                       VIOLET_DIALOGUE_CONFIG[self.language]["send_permission"] + "\n\n"
+        self.proscenium_text.insert("end", violet_send_permission_lines)
+        self.proscenium_text.config(state="disabled")
+        self.proscenium_text.see("end")
 
-    def display_submitted_log(self, log):
-        pass
+    def display_send_cancel_instruction(self):
+        self.proscenium_text.config(state="normal")
+        violet_send_cancel_lines = VIOLET_DIALOGUE_CONFIG["role"] + \
+                                   VIOLET_DIALOGUE_CONFIG[self.language]["send_cancel"] + "\n\n"
+        self.proscenium_text.insert("end", violet_send_cancel_lines)
+        self.proscenium_text.config(state="disabled")
+        self.proscenium_text.see("end")
 
-    def display_sent_logs(self, logs):
-        pass
-
-    def display_send_instruction(self):
-        pass
-
-    def display_send_state(self):
-        pass
+    def display_send_finished(self, receiver):
+        full_name = receiver["sur_name"] + receiver["given_name"]
+        self.proscenium_text.config(state="normal")
+        logmin_send_finished_lines = LOGMIN_DIALOGUE_CONFIG["role"] + \
+                                     LOGMIN_DIALOGUE_CONFIG[self.language]["send_finished"] \
+                                         .format(full_name, receiver["address"]) + "\n\n"
+        self.proscenium_text.insert("end", logmin_send_finished_lines)
+        self.proscenium_text.config(state="disabled")
+        self.proscenium_text.see("end")

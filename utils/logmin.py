@@ -12,8 +12,8 @@ with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:
 SENDER_CONFIG = CONFIG["sender"]
 
 
-def organize_html_email(logs, receiver):
-    email_header, email_body = joint_email_content(logs, receiver)
+def organize_html_email(members, receiver):
+    email_header, email_body = joint_email_content(members, receiver)
     email = MIMEText(email_body, "html", "utf-8")
     email["From"] = CONFIG["sender"]["address"]
     email["To"] = receiver["address"]
@@ -31,7 +31,7 @@ def adjust_logs(members, receiver):
             current_member = copied_members.pop(i)
             break
     if current_member is None:
-        return
+        return copied_members
     copied_members.insert(0, current_member)
     return copied_members
 
@@ -47,7 +47,7 @@ def member_filter(receivers):
                   "grade": grade,
                   "address": address,
                   "register_state": False,
-                  "log": "1. ...\n2. ...\n3. ..."}
+                  "log": "1. ...\n\n2. ...\n\n3. ..."}
         members.append(member)
 
     members = sorted(members, key=lambda i: i["grade"])
@@ -63,25 +63,8 @@ class LogMin:
         self.server = smtplib.SMTP_SSL(SENDER_CONFIG["smtp_server"], 465, timeout=3)
 
     def build_mail_server(self):
-        self.server.set_debuglevel(2)
+        self.server.set_debuglevel(0)
         self.server.login(SENDER_CONFIG["address"], SENDER_CONFIG["authorization_code"])
 
 LOGMIN = LogMin()
 
-if __name__ == "__main__":
-    logs = [
-        {
-            "member": "张三",
-            "events": ["Coding", "Reading paper"]
-        },
-        {
-            "member": "王二",
-            "events": ["上课", "阅读论文"]
-        },
-        {
-            "member": "李四",
-            "events": ["干饭", "睡大觉"]
-        }
-    ]
-    receivers = CONFIG["receivers"]
-    members = member_filter(receivers)

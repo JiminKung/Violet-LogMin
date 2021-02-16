@@ -111,6 +111,7 @@ class LogFrame(tk.LabelFrame):
         for member in LOGMIN.members:
             if member["address"] == selected_member[3]:
                 if member["log"] == log:
+                    self.context_box["proscenium_frame"].throw_log_unchange_exception()
                     return
                 member["register_state"] = True
                 member["log"] = log
@@ -122,6 +123,7 @@ class LogFrame(tk.LabelFrame):
 
         if send_permission:
             self.context_box["member_list_frame"].send_email_button.config(state="normal")
+            self.context_box["proscenium_frame"].display_send_permission()
 
     def clear_log_text(self):
         self.log_text.delete("0.0", "end")

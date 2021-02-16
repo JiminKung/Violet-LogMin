@@ -1,2 +1,2 @@
 # Violet-LogMin
-A auto-log system.
+A auto-mail logs system.

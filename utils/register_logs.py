@@ -17,21 +17,3 @@ import yaml
 #         return
 #     logs.insert(0, current_log)
 
-
-if __name__ == "__main__":
-    logs = [
-        {
-            "member": "张三",
-            "events": ["Coding", "Reading paper"]
-        },
-        {
-            "member": "王二",
-            "events": ["上课", "阅读论文"]
-        },
-        {
-            "member": "李四",
-            "events": ["干饭", "睡大觉"]
-        }
-    ]
-    receiver = CONFIG["receivers"][0]
-    adjust_logs(logs, receiver)

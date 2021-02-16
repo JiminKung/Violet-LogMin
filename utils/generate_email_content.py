@@ -21,7 +21,7 @@ def generate_email_salutation(degree, sur_name):
 def generate_email_opener():
     url = CONFIG["project"]["github"]
     opener = random.choice(CONFIG["email"]["opener"])
-    return "<p>&ensp;&ensp;This is <a href='{}'>LogMin</a>, an auto-mail log robot. {}</p>".format(url, opener)
+    return "<p>&ensp;&ensp;This is <a href='{}'>LogMin</a>, an auto-mail logs robot. {}</p>".format(url, opener)
 
 
 def generate_log_table(members):
@@ -32,7 +32,7 @@ def generate_log_table(members):
         # for event in log["events"]:
         #     events += (event + "<br>")
         # events = events[:-4]
-        log = member["log"] + "<br>"
+        log = member["log"].replace("\n", "<br>")
         member_log += "<tr><td>{}</td><td>{}</td></tr>".format(member["name"], log)
     log_table = "<table border='1' style='border-collapse: collapse; " \
                 "margin-left: 2em'>{}{}</table>".format(table_header, member_log)
@@ -54,27 +54,14 @@ def generate_email_inscriber():
     return "<p>&ensp;&ensp;{},<br>&ensp;&ensp;{}</p>".format(inscriber, CONFIG["email"]["sender_name"])
 
 
-def joint_email_content(logs, receiver):
+def joint_email_content(members, receiver):
     email_header = generate_email_header()
     email_salutation = generate_email_salutation(receiver["degree"], receiver["sur_name"])
     email_opener = generate_email_opener()
-    log_table = generate_log_table(logs)
+    log_table = generate_log_table(members)
     daily_quote = generate_daily_quote()
     email_regards = generate_email_regards()
     email_inscriber = generate_email_inscriber()
     email_body = email_salutation + email_opener + log_table + daily_quote + email_regards + email_inscriber
     return email_header, email_body
 
-
-if __name__ == "__main__":
-    logs = [
-        {
-            "member": "张三",
-            "events": ["Coding", "Reading paper"]
-        },
-        {
-            "member": "王二",
-            "events": ["上课", "阅读论文"]
-        }
-    ]
-    email_header, email_body = joint_email_content(logs, CONFIG["receivers"][0])
