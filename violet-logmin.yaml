@@ -1,0 +1,335 @@
+project:
+  name: Violet-LogMin
+  author: the-mingo
+  github: https://github.com/The-MinGo/Violet-LogMin
+
+
+group:
+  name: 群智感知小组
+
+
+sender:
+  smtp_server: smtp.qq.com
+  address: XXXXXXXX@qq.com
+  authorization_code: XXXXXXXX
+
+
+receivers:
+  - sur_name: 张
+    given_name: 全旦
+    degree: Prof.
+    address: 12345678900@163.com
+
+  - sur_name: Kong
+    given_name: Jimin
+    degree: Bachelor.
+    grade: 2017
+    address: kong_jimin@qq.com
+
+  - sur_name: 蔡
+    given_name: 某鲲
+    degree: Master.
+    grade: 2020
+    address: cai_xukun@qq.com
+
+
+shanbay:
+  url: https://apiv3.shanbay.com/weapps/dailyquote/quote/
+
+
+email:
+  sender_name: Violet & LogMin
+  opener:
+    - Please check your logs below.
+    - Please check your logs as follow.
+
+  regards:
+    - Kind regards
+    - Best wishes
+    - Good night
+
+  inscriber:
+    - Yours
+    - Sincerely
+
+
+widget:
+  boot_page:
+    title: Violet-LogMin
+    icon: widgets/violet.ico
+    window_width: 450
+    window_height: 180
+    resizeable: False
+
+  welcome_label_frame:
+    text: Welcome
+    labelanchor: n
+    font_family: Times
+    font_size: 14
+    font_weight: bold
+    pady: 10
+
+  welcome_label:
+    text: "Welcome to Violet-LogMin, an auto-mail logs system! And please choose the language to display."
+    side: top
+    wraplength: 420
+    justify: center
+    font_family: Times
+    font_size: 14
+    font_weight: normal
+    padx: 5
+    pady: 10
+
+  choice_frame:
+    padx: 10
+    pady: 10
+
+  english_button:
+    text: English
+    font_family: Consolas
+    font_size: 14
+    font_weight: normal
+    side: left
+    padx: 40
+
+  chinese_button:
+    text: 中文
+    font_family: Consolas
+    font_size: 14
+    font_weight: normal
+    side: right
+    padx: 40
+
+  violet:
+    icon: widgets/violet.ico
+    window_width: 950
+    window_height: 500
+    resizeable: False
+    Chinese:
+      title: "Violet: 自动记账人偶"
+    English:
+      title: "Violet, an auto-register droll"
+
+  theater_window:
+    orient: vertical
+    showhandle: False
+    sashrelief: flat
+
+  clapboard_window:
+    orient: horizontal
+    showhandle: False
+    sashrelief: flat
+
+  daily_quote_frame:
+    row: 0
+    column: 0
+    sticky: ns
+    labelanchor: nw
+    font_family: Times
+    font_size: 13
+    font_weight: bold
+    Chinese:
+      text: 每日一句
+    English:
+      text: Daily Quote
+
+  today_label:
+    font_family: Times
+    font_size: 12
+    font_weight: italic
+    underline: underline
+
+  quote_label:
+    justify: left
+    wraplength: 200
+    padx: 10
+    pady: 5
+    font_family: Consolas
+    font_size: 12
+    font_weight: normal
+
+  member_list_frame:
+    row: 0
+    column: 1
+    sticky: ns
+    labelanchor: nw
+    font_family: Times
+    font_size: 13
+    font_weight: bold
+    Chinese:
+      text: 成员
+    English:
+      text: Members
+
+  member_list_treeview:
+    show: headings
+    columns: [state, name, grade, email]
+    anchors: [center, center, center, center]
+    widths: [80, 80, 60, 200]
+    selectmode: browse
+    height: 8
+    side: top
+    padx: 5
+    pady: 5
+    Chinese:
+      headings: [状态, 姓名, 年级, 邮箱]
+      register_state: [已登记, 未登记]
+    English:
+      headings: [State, Name, Grade, Email]
+      register_state: [registed, unregisted]
+
+  member_list_vertical_scrollbar:
+    orient: vertical
+    side: right
+    fill: y
+
+  member_list_horizontal_scrollbar:
+    orient: horizontal
+    side: bottom
+    fill: x
+
+  send_email_button:
+    side: bottom
+    pady: 5
+    font_family: Consolas
+    font_size: 11
+    font_weight: normal
+    Chinese:
+      text: 发送邮件
+      message_title: 提示
+      message: 确定要发送邮件吗？
+    English:
+      text: Send Email
+      message_title: Tips
+      message: Make sure to send the email?
+
+  log_frame:
+    row: 0
+    column: 2
+    sticky: ns
+    labelanchor: nw
+    font_family: Times
+    font_size: 13
+    font_weight: bold
+    Chinese:
+      text: 日志
+    English:
+      text: Logs
+
+  log_text:
+    side: top
+    padx: 5
+    pady: 5
+    wrap: char
+    width: 60
+    height: 10
+    font_family: Consolas
+    font_size: 12
+    font_weight: normal
+
+  log_button_frame:
+    side: bottom
+
+  log_submit_button:
+    side: left
+    padx: 5
+    pady: 5
+    font_family: Consolas
+    font_size: 11
+    font_weight: normal
+    Chinese:
+      text: 确定
+    English:
+      text: Submit
+
+  log_clear_button:
+    side: right
+    padx: 5
+    pady: 5
+    font_family: Consolas
+    font_size: 11
+    font_weight: normal
+    Chinese:
+      text: 清除
+    English:
+      text: Clear
+
+  log_vertical_scrollbar:
+    orient: vertical
+    side: right
+    fill: y
+
+  log_horizontal_scrollbar:
+    orient: horizontal
+    side: bottom
+    fill: x
+
+  proscenium_frame:
+    side: bottom
+    labelanchor: nw
+    padx: 20
+    pady: 10
+    font_family: Times
+    font_size: 13
+    font_weight: bold
+    Chinese:
+      text: 输出
+    English:
+      text: Output
+
+  proscenium_text:
+    padx: 15
+    pady: 10
+    fill: x
+    wrap: word
+    font_family: Consolas
+    font_size: 12
+    font_weight: normal
+
+  proscenium_scrollbar:
+    orient: vertical
+    side: right
+    fill: y
+
+
+dialogue:
+  LogMin:
+    role: "LogMin: "
+    Chinese:
+      introduction: LogMin 将为您分发日志邮件
+      send_finished: 日志成功发送至 [{}-{}]
+    English:
+      introduction: And LogMin will mass mail logs for you
+      send_finished: The log was sent to [{}-{}] successfully
+
+  Violet:
+    role: "Violet: "
+    Chinese:
+      introduction: Violet 将与您一起录入日志
+      miss_selecting: 您未选中任何成员，请单击列表中的成员来填写或修改日志
+      empty_input: 输入为空，请检查输入的日志是否正确
+      log_unchange: 日志未被修改
+      select_member: 已选中 [{}-{}]
+      send_permission: 所有成员的日志均已登记，发送邮件按钮激活
+      send_cancel: 邮件取消发送
+    English:
+      introduction: Violet will work with you to register logs
+      miss_selecting: No member was selected, please click on a member in the list to add or modify his/her log
+      empty_input: The input is empty, please check whether the log entered is correct
+      log_unchange: Log is not modified
+      select_member: "[{}-{}] has been selected"
+      send_permission: All members' logs are registered, and the send email button is activated
+      send_cancel: Mail canceled
+
+  Violet-LogMin:
+    role: "Violet&LogMin: "
+    Chinese:
+      welcome: 这是一个日志自动分发系统，欢迎使用！
+      introduction: 项目实现了两个主要功能：1. 录入小组成员的日志 (Violet) 2. 编写并分发日志邮件 (LogMin)
+      website: 已经开源在 https://github.com/The-MinGo/Violet-LogMin
+      tutorial: 这个工具足够简单，我们相信您很快就能知道如何使用，祝您愉快！
+    English:
+      welcome: Welcome to the auto-mail logs system!
+      introduction: "This project implements two basic functions: 1. logging of group members (Violet) 2. writing and mass mailing of logs (LogMin)"
+      website: And it has been opened source on https://github.com/The-MinGo/Violet-LogMin
+      tutorial: This tool is so simple that we believe you'll know how to use it at first glance, thank you and enjoy!

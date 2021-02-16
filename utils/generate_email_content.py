@@ -32,7 +32,8 @@ def generate_log_table(members):
         # for event in log["events"]:
         #     events += (event + "<br>")
         # events = events[:-4]
-        log = member["log"].replace("\n", "<br>")
+        log = member["log"].replace("\n\n", "\n")
+        log = log.replace("\n", "<br>")
         member_log += "<tr><td>{}</td><td>{}</td></tr>".format(member["name"], log)
     log_table = "<table border='1' style='border-collapse: collapse; " \
                 "margin-left: 2em'>{}{}</table>".format(table_header, member_log)

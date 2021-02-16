@@ -105,7 +105,6 @@ class LogFrame(tk.LabelFrame):
         if log == "" or log.strip() == "":
             self.context_box["proscenium_frame"].throw_empty_input_exception()
             return
-        log = log.replace("\n\n", "\n")
         register_state = MEMBER_LIST_TREEVIEW_CONFIG[self.language]["register_state"][0]
         send_permission = True
         for member in LOGMIN.members:

@@ -35,6 +35,7 @@ def adjust_logs(members, receiver):
     copied_members.insert(0, current_member)
     return copied_members
 
+
 def member_filter(receivers):
     members = []
     for receiver in receivers:

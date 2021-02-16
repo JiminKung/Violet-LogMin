@@ -37,7 +37,7 @@ class DailyQuoteFrame(tk.LabelFrame):
 
     def setup(self):
         self.today = datetime.datetime.today()
-        self.today_label = tk.Label(self, text=format_date(self.today),
+        self.today_label = tk.Label(self, text="\n" + format_date(self.today),
                                     font=(TODAY_LABEL_CONFIG["font_family"],
                                           TODAY_LABEL_CONFIG["font_size"],
                                           TODAY_LABEL_CONFIG["font_weight"],
