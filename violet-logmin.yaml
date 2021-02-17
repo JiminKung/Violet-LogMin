@@ -10,30 +10,46 @@ group:
 
 sender:
   smtp_server: smtp.qq.com
-  address: XXXXXXXX@qq.com
-  authorization_code: XXXXXXXX
+  address: the-mingo@qq.com
+  authorization_code: mskoungqxtpjceid
+
+#  smtp_server: smtp.qq.com
+#  address: XXXXXXXX@qq.com
+#  authorization_code: XXXXXXXX
 
 
 logs_file: logs.json
 
 
 receivers:
-  - sur_name: 张
-    given_name: 全旦
-    degree: Prof.
-    address: 12345678900@163.com
-
   - sur_name: Kong
     given_name: Jimin
     degree: Bachelor.
     grade: 2017
-    address: kong_jimin@qq.com
+    address: the-mingo@qq.com
 
   - sur_name: 蔡
     given_name: 某鲲
     degree: Master.
     grade: 2020
-    address: cai_xukun@qq.com
+    address: 3047673038@qq.com
+
+#  - sur_name: 张
+#    given_name: 全旦
+#    degree: Prof.
+#    address: 12345678900@163.com
+#
+#  - sur_name: Kong
+#    given_name: Jimin
+#    degree: Bachelor.
+#    grade: 2017
+#    address: kong_jimin@qq.com
+#
+#  - sur_name: 蔡
+#    given_name: 某鲲
+#    degree: Master.
+#    grade: 2020
+#    address: cai_xukun@qq.com
 
 
 shanbay:
