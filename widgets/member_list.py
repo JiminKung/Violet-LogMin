@@ -117,7 +117,7 @@ class MemberListFrame(tk.LabelFrame):
             for receiver in LOGMIN.receivers:
                 adjusted_members = adjust_logs(LOGMIN.members, receiver)
                 email = organize_html_email(adjusted_members, receiver)
-                # LOGMIN.server.sendmail(LOGMIN.sender_address, receiver["address"], email.as_string())
+                LOGMIN.server.sendmail(LOGMIN.sender_address, receiver["address"], email.as_string())
                 self.context_box["proscenium_frame"].display_send_finished(receiver)
             LOGMIN.store_logs()
         else:
