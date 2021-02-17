@@ -1,7 +1,7 @@
 import yaml
 import tkinter as tk
 
-from widgets.utils import centered_display
+from utils.utils import centered_display
 from widgets.violet import Voilet
 
 with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:

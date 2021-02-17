@@ -1,9 +1,13 @@
+import os
 import copy
+import json
 import yaml
 import smtplib
+import datetime
 from email.header import Header
 from email.mime.text import MIMEText
 
+from utils.utils import format_date
 from utils.generate_email_content import joint_email_content
 
 with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:
@@ -50,7 +54,6 @@ def member_filter(receivers):
                   "register_state": False,
                   "log": "1. ...\n\n2. ...\n\n3. ..."}
         members.append(member)
-
     members = sorted(members, key=lambda i: i["grade"])
 
     return members
@@ -58,6 +61,7 @@ def member_filter(receivers):
 
 class LogMin:
     def __init__(self):
+        self.logs_file = CONFIG["logs_file"]
         self.receivers = CONFIG["receivers"]
         self.sender_address = SENDER_CONFIG["address"]
         self.members = member_filter(self.receivers)
@@ -66,6 +70,23 @@ class LogMin:
     def build_mail_server(self):
         self.server.set_debuglevel(0)
         self.server.login(SENDER_CONFIG["address"], SENDER_CONFIG["authorization_code"])
+
+    def store_logs(self):
+        if not os.path.exists(self.logs_file):
+            stored_logs = []
+        else:
+            with open(self.logs_file, mode='r', encoding="utf-8") as f:
+                stored_logs = json.load(f)
+        today = format_date(datetime.datetime.today())
+        today_logs = {"date": today,
+                       "logs": []}
+        for member in self.members:
+            item = {"name": member["name"],
+                    "log": member["log"]}
+            today_logs["logs"].append(item)
+        stored_logs.append(today_logs)
+        with open(self.logs_file, mode='w', encoding="utf-8") as f:
+            json.dump(stored_logs, f, ensure_ascii=False)
 
 LOGMIN = LogMin()
 

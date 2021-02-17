@@ -1,7 +1,8 @@
 import yaml
 import tkinter as tk
 
-from widgets.utils import centered_display
+from utils.logmin import LOGMIN
+from utils.utils import centered_display
 from widgets.proscenium import ProsceniumFrame
 
 from widgets.log import LogFrame
@@ -67,4 +68,5 @@ class Voilet(tk.Toplevel):
         self.theater_window.add(self.proscenium_frame)
 
     def exit(self):
+        LOGMIN.server.quit()
         self.context_box["boot_page"].exit()

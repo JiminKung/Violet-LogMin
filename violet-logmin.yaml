@@ -14,6 +14,9 @@ sender:
   authorization_code: XXXXXXXX
 
 
+logs_file: logs.json
+
+
 receivers:
   - sur_name: 张
     given_name: 全旦

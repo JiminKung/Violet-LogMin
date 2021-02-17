@@ -2,7 +2,7 @@ import yaml
 import datetime
 import tkinter as tk
 
-from widgets.utils import format_date
+from utils.utils import format_date
 from utils.generate_email_content import DAILY_QUOTE
 
 with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:
