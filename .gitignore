@@ -1,8 +1,8 @@
 /venv
-violet-logmin.yaml
 /.idea
 /__pycache__
 /utils/__pycache__
 /widgets/__pycache__
 /imgs
 logs.json
+violet-logmin.yaml
