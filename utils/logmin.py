@@ -16,8 +16,8 @@ with open("violet-logmin.yaml", mode='r', encoding="utf-8") as f:
 SENDER_CONFIG = CONFIG["sender"]
 
 
-def organize_html_email(members, receiver):
-    email_header, email_body = joint_email_content(members, receiver)
+def organize_html_email(members, receiver, language):
+    email_header, email_body = joint_email_content(members, receiver, language)
     email = MIMEText(email_body, "html", "utf-8")
     email["From"] = CONFIG["sender"]["address"]
     email["To"] = receiver["address"]
