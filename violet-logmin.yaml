@@ -1,7 +1,7 @@
 project:
   name: Violet-LogMin
   author: the-mingo
-  github: https://github.com/The-MinGo/Violet-LogMin
+  github: https://github.com/JiminKung/Violet-LogMin
 
 
 group:
@@ -10,46 +10,30 @@ group:
 
 sender:
   smtp_server: smtp.qq.com
-  address: the-mingo@qq.com
-  authorization_code: mskoungqxtpjceid
-
-#  smtp_server: smtp.qq.com
-#  address: XXXXXXXX@qq.com
-#  authorization_code: XXXXXXXX
+  address: XXXXXXXX@qq.com
+  authorization_code: XXXXXXXX
 
 
 logs_file: logs.json
 
 
 receivers:
+  - sur_name: 张
+    given_name: 全旦
+    degree: Prof.
+    address: 12345678900@163.com
+
   - sur_name: Kong
     given_name: Jimin
     degree: Bachelor.
     grade: 2017
-    address: the-mingo@qq.com
+    address: kong_jimin@qq.com
 
   - sur_name: 蔡
     given_name: 某鲲
     degree: Master.
     grade: 2020
-    address: 3047673038@qq.com
-
-#  - sur_name: 张
-#    given_name: 全旦
-#    degree: Prof.
-#    address: 12345678900@163.com
-#
-#  - sur_name: Kong
-#    given_name: Jimin
-#    degree: Bachelor.
-#    grade: 2017
-#    address: kong_jimin@qq.com
-#
-#  - sur_name: 蔡
-#    given_name: 某鲲
-#    degree: Master.
-#    grade: 2020
-#    address: cai_xukun@qq.com
+    address: cai_xukun@qq.com
 
 
 shanbay:
@@ -345,10 +329,10 @@ dialogue:
     Chinese:
       welcome: 这是一个日志自动分发系统，欢迎使用！
       introduction: 项目实现了两个主要功能：1. 录入小组成员的日志 (Violet) 2. 编写并分发日志邮件 (LogMin)
-      website: 已经开源在 https://github.com/The-MinGo/Violet-LogMin
+      website: 已经开源在 https://github.com/JiminKung/Violet-LogMin
       tutorial: 这个工具足够简单，我们相信您很快就能知道如何使用，祝您愉快！
     English:
       welcome: Welcome to the auto-mail logs system!
       introduction: "This project implements two basic functions: 1. logging of group members (Violet) 2. writing and mass mailing of logs (LogMin)"
-      website: And it has been opened source on https://github.com/The-MinGo/Violet-LogMin
+      website: And it has been opened source on https://github.com/JiminKung/Violet-LogMin
       tutorial: This tool is so simple that we believe you'll know how to use it at first glance, thank you and enjoy!
