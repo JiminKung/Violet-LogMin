@@ -1,5 +1,5 @@
 /venv
-#violet-logmin.yaml
+violet-logmin.yaml
 /.idea
 /__pycache__
 /utils/__pycache__
